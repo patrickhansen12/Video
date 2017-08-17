@@ -45,8 +45,13 @@ namespace videoMenu
 
 
                         }
-
-                        Console.ReadLine();
+                        int exit;
+                        
+                        exit = int.Parse(Console.ReadLine());
+                        if (exit == 4)
+                        {
+                            System.Environment.Exit(4);
+                        }
                         break;
                     case 2:
                         Console.WriteLine("add a new video");
@@ -56,6 +61,7 @@ namespace videoMenu
                         break;
                     case 4:
                         Console.WriteLine("Exit");
+                        System.Environment.Exit(4);
                         break;
                 }
                 //selection = ShowMenu(menuItems);
