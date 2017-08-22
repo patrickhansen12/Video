@@ -19,7 +19,7 @@ namespace AVideoMenuUI
 
             Videoes vid = new Videoes()
             {
-                VideoName = "Fish talks:",
+                VideoName = "Fish talks: ",
                 VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
                 //VideoId = Id++
             };
@@ -27,7 +27,7 @@ namespace AVideoMenuUI
 
             bllFacade.GetVideoService().Create(new Videoes()
             {
-                VideoName = "Bob goes to the store:",
+                VideoName = "Bob goes to the store: ",
                 VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
                 //VideoId = id++
             });
@@ -89,8 +89,9 @@ namespace AVideoMenuUI
 
 
         }
+    
 
-        private static int ShowMenu(string[] menuItems)
+    private static int ShowMenu(string[] menuItems)
         {
 
 
@@ -129,18 +130,36 @@ namespace AVideoMenuUI
             }
 
             return bllFacade.GetVideoService().Get(id);
+        }
 
-            private static void DeleteVideos()
+        private static void DeleteVideos()
+        {
+            var videoFound = FindVideoById();
+            if (videoFound != null)
             {
-                var videoFound = FindVideoById();
                 bllFacade.GetVideoService().Delete(videoFound.VideoId);
             }
+            else
+            {
+                Console.WriteLine("Video does not exist");
+                Console.ReadLine();
+            }
+        }
 
-            public static void EditVideo()
+
+        public static void EditVideo()
             {
                 var videoes = FindVideoById();
-                Console.WriteLine("name");
-                videoes.VideoName = Console.ReadLine();
+                if (videoes != null)
+                {
+                    Console.WriteLine("name");
+                    videoes.VideoName = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine("Video does not exist");
+                    Console.ReadLine();
+                }
             }
 
             private static void AddVideos()
@@ -150,8 +169,8 @@ namespace AVideoMenuUI
 
                 bllFacade.GetVideoService().Create(new Videoes()
                 {
-                    VideoName = name,
-                    VideoId = id++
+                    VideoName = name
+                  
                 });
             }
 
@@ -162,12 +181,12 @@ namespace AVideoMenuUI
                 {
                     Console.WriteLine($"Name : {vidoes.VideoName}" + $"{vidoes.VideoLenght}" + $"{vidoes.VideoId}");
                 }
-
+                
             }
 
         }
     }
-}
+
 
 
 
