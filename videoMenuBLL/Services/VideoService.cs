@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using videoMenuDAL;
 using videoMenuEntity;
@@ -9,47 +10,41 @@ namespace videoMenuBLL.Services
 {
     class VideoService : IVideoService
     {
-        public Videoes Create(Videoes vid)
+        public IVideoRepository repo;
+
+        public VideoService(IVideoRepository repo)
         {
-            Videoes newVid;
-            FakeDB.Videoes.Add(newVid = new Videoes()
-            {
-                VideoName = vid.VideoName,
-                VideoId = FakeDB.Id++
-            });
-            return newVid;
+            this.repo = repo;
         }
+      
 
 
         public Videoes Delete(int Id)
         {
-            var vid = Get(Id);
-            FakeDB.Videoes.Remove(vid);
+            return repo.Delete(Id);
 
-            return vid;
-           
         }   
 
 
         public Videoes Get(int Id)
         {
-            return FakeDB.Videoes.FirstOrDefault(x => x.VideoId == Id); 
+            return repo.Get(Id);
+            
+        }
+
+        public Videoes Create(Videoes vid)
+        {
+            return repo.Create(vid);
         }
 
         public List<Videoes> GetAll()
         {
-           return new List<Videoes>(FakeDB.Videoes);
+            return repo.GetAll();
         }
 
         public Videoes Update(Videoes vid)
         {
-            var vidFromDb = Get(vid.VideoId);
-            if (vidFromDb == null)
-            {
-                throw new InvalidOperationException("Video not found");
-            }
-            vidFromDb.VideoName = vid.VideoName;
-            return vidFromDb;
+            return null;
         }
     }
 }

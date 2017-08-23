@@ -139,11 +139,8 @@ namespace AVideoMenuUI
             {
                 bllFacade.GetVideoService().Delete(videoFound.VideoId);
             }
-            else
-            {
-                Console.WriteLine("Video does not exist");
-                Console.ReadLine();
-            }
+            var response = videoFound == null ? "Video not found" : "video was deleted";
+            Console.WriteLine(response);
         }
 
 
@@ -155,11 +152,9 @@ namespace AVideoMenuUI
                     Console.WriteLine("name");
                     videoes.VideoName = Console.ReadLine();
                 }
-                else
-                {
-                    Console.WriteLine("Video does not exist");
-                    Console.ReadLine();
-                }
+                var response = videoes == null ? "Video not found" : "video was edited";
+            Console.WriteLine(response);
+
             }
 
             private static void AddVideos()
