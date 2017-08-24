@@ -8,7 +8,7 @@ using videoMenuEntity;
 
 namespace videoMenuBLL.Services
 {
-    class VideoService : IVideoService
+    public class VideoService : IVideoService
     {
         public IVideoRepository repo;
 
@@ -44,7 +44,13 @@ namespace videoMenuBLL.Services
 
         public Videoes Update(Videoes vid)
         {
-            return null;
+            var videoFromDB = Get(vid.VideoId);
+            if (videoFromDB == null)
+            {
+                throw new InvalidOperationException("Det virker ikke");
+            }
+            videoFromDB.VideoName = vid.VideoName;
+            return videoFromDB;
         }
     }
 }

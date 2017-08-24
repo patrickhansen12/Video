@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace videoMenuDAL.Repositories
 {
-    class VideoRepostoryFakeDB : IVideoRepository
+    public class VideoRepostoryFakeDB : IVideoRepository
     {
 
         #region

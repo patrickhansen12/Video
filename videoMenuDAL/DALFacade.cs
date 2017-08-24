@@ -8,7 +8,17 @@ namespace videoMenuDAL
 {
     public class DALFacade
     {
-        public IVideoRepository VideoRepository => new VideoRepostoryFakeDB();
+        public IVideoRepository VideoRepository
+        {
+            get { return new VideoRepositoryEFMemory
+                    (new Context.InMemoryContext()); }
+
+
+
+            
+
+        }
 
     }
+
 }

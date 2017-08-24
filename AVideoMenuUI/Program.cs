@@ -11,7 +11,7 @@ namespace AVideoMenuUI
     {
         static BLLFacade bllFacade = new BLLFacade();
 
-
+        
         public static void Main(string[] args)
         {
 
@@ -23,9 +23,9 @@ namespace AVideoMenuUI
                 VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
                 //VideoId = Id++
             };
-            bllFacade.GetVideoService().Create(vid);
+            bllFacade.VideoService.Create(vid);
 
-            bllFacade.GetVideoService().Create(new Videoes()
+            bllFacade.VideoService.Create(new Videoes()
             {
                 VideoName = "Bob goes to the store: ",
                 VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
@@ -129,7 +129,7 @@ namespace AVideoMenuUI
                 Console.WriteLine("Please insert a number");
             }
 
-            return bllFacade.GetVideoService().Get(id);
+            return bllFacade.VideoService.Get(id);
         }
 
         private static void DeleteVideos()
@@ -137,7 +137,7 @@ namespace AVideoMenuUI
             var videoFound = FindVideoById();
             if (videoFound != null)
             {
-                bllFacade.GetVideoService().Delete(videoFound.VideoId);
+                bllFacade.VideoService.Delete(videoFound.VideoId);
             }
             var response = videoFound == null ? "Video not found" : "video was deleted";
             Console.WriteLine(response);
@@ -157,12 +157,13 @@ namespace AVideoMenuUI
 
             }
 
+
             private static void AddVideos()
             {
                 Console.WriteLine("Name:  ");
                 var name = Console.ReadLine();
 
-                bllFacade.GetVideoService().Create(new Videoes()
+                bllFacade.VideoService.Create(new Videoes()
                 {
                     VideoName = name
                   
@@ -172,7 +173,7 @@ namespace AVideoMenuUI
 
             public static void listvideo()
             {
-                foreach (var vidoes in bllFacade.GetVideoService().GetAll())
+                foreach (var vidoes in bllFacade.VideoService.GetAll())
                 {
                     Console.WriteLine($"Name : {vidoes.VideoName}" + $"{vidoes.VideoLenght}" + $"{vidoes.VideoId}");
                 }
