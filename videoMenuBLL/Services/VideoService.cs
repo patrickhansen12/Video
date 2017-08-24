@@ -8,49 +8,44 @@ using videoMenuEntity;
 
 namespace videoMenuBLL.Services
 {
-    public class VideoService : IVideoService
+    class VideoService : IVideoService
     {
-        public IVideoRepository repo;
+        IVideoRepository repo;
 
         public VideoService(IVideoRepository repo)
         {
             this.repo = repo;
         }
-      
 
+        public Video Create(Video video)
+        {
+            return repo.Create(video);
+        }
 
-        public Videoes Delete(int Id)
+        public Video Delete(int Id)
         {
             return repo.Delete(Id);
+        }
 
-        }   
-
-
-        public Videoes Get(int Id)
+        public Video Get(int Id)
         {
             return repo.Get(Id);
-            
         }
 
-        public Videoes Create(Videoes vid)
-        {
-            return repo.Create(vid);
-        }
-
-        public List<Videoes> GetAll()
+        public List<Video> GetAll()
         {
             return repo.GetAll();
         }
 
-        public Videoes Update(Videoes vid)
+        public Video Update(Video video)
         {
-            var videoFromDB = Get(vid.VideoId);
-            if (videoFromDB == null)
+            var videoFromDb = Get(video.Id);
+            if (videoFromDb == null)
             {
-                throw new InvalidOperationException("Det virker ikke");
+                throw new InvalidOperationException("Video not found");
             }
-            videoFromDB.VideoName = vid.VideoName;
-            return videoFromDB;
+            videoFromDb.Name = video.Name;
+            return videoFromDb;
         }
     }
 }

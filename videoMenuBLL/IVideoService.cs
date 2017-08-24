@@ -7,12 +7,13 @@ namespace videoMenuBLL
 {
     public interface IVideoService
     {
-        Videoes Create(Videoes vid);
-        List<Videoes> GetAll();
-        Videoes Get(int id);
+        Video Create(Video video);
 
-        Videoes Update(Videoes vid);
-        Videoes Delete(int id);
+        List<Video> GetAll();
+        Video Get(int Id);
 
+        Video Update(Video video);
+
+        Video Delete(int Id);
     }
 }

@@ -6,45 +6,37 @@ using System.Linq;
 
 namespace videoMenuDAL.Repositories
 {
-    public class VideoRepostoryFakeDB : IVideoRepository
+    class VideoRepositoryFakeDB : IVideoRepository
     {
-
-        #region
+        private static List<Video> videos = new List<Video>();
         private static int Id = 1;
-        private static List<Videoes> Videoes = new List<Videoes>();
-        #endregion
-        public Videoes Create(Videoes vid)
+
+        public Video Create(Video video)
         {
-            Videoes newVid;
-            Videoes.Add(newVid = new Videoes()
+            Video newVideo;
+            videos.Add(newVideo = new Video()
             {
-                VideoName = vid.VideoName,
-                VideoId = Id++
+                Name = video.Name,
+                Id = Id++
             });
-            return newVid;
+            return newVideo;
         }
 
-        public List<Videoes> GetAll()
-        {
-            return new List<Videoes>(Videoes);
-        }
-
-        public Videoes Get(int id)
-        {
-            return Videoes.FirstOrDefault(x => x.VideoId == Id);
-        }
-
-        public Videoes Update(Videoes vid)
-        {
-            return null;
-        }   
-
-        public Videoes Delete(int id)
+        public Video Delete(int Id)
         {
             var vid = Get(Id);
-            Videoes.Remove(vid);
-
+            videos.Remove(vid);
             return vid;
+        }
+
+        public Video Get(int Id)
+        {
+            return videos.FirstOrDefault(x => x.Id == Id);
+        }
+
+        public List<Video> GetAll()
+        {
+            return new List<Video>(videos);
         }
     }
 }

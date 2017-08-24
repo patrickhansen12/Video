@@ -6,14 +6,17 @@ using videoMenuEntity;
 
 namespace videoMenuDAL.Context
 {
-   public class InMemoryContext : DbContext
+    class InMemoryContext : DbContext
     {
-        private static DbContextOptions<InMemoryContext> options =
-            new DbContextOptionsBuilder<InMemoryContext>().UseInMemoryDatabase("The db").Options;
+        static DbContextOptions<InMemoryContext> options =
+            new DbContextOptionsBuilder<InMemoryContext>()
+                .UseInMemoryDatabase("TheDataBase").Options;
+
         public InMemoryContext() : base(options)
         {
-            
+
         }
-public DbSet<Videoes>Videoeses { get; set; }
+
+        public DbSet<Video> Videos { get; set; }
     }
 }

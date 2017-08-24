@@ -5,12 +5,13 @@ using videoMenuEntity;
 
 namespace videoMenuDAL
 {
-   public interface IVideoRepository
+    public interface IVideoRepository
     {
-        Videoes Create(Videoes vid);
-        List<Videoes> GetAll();
-        Videoes Get(int id);
-        
-        Videoes Delete(int id);
+        Video Create(Video video);
+
+        List<Video> GetAll();
+        Video Get(int Id);
+
+        Video Delete(int Id);
     }
 }

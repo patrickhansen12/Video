@@ -7,40 +7,40 @@ using videoMenuEntity;
 
 namespace videoMenuDAL.Repositories
 {
-    public class VideoRepositoryEFMemory : IVideoRepository
+    class VideoRepositoryEFMemory : IVideoRepository
     {
-         InMemoryContext _context;
+        InMemoryContext _context;
 
         public VideoRepositoryEFMemory(InMemoryContext context)
         {
             _context = context;
         }
-        public Videoes Create(Videoes vid)
+
+        public Video Create(Video video)
         {
-           
-            _context.Videoeses.Add(vid);
+            _context.Videos.Add(video);
+            _context.SaveChanges();
+            return video;
+        }
+
+        public Video Delete(int Id)
+        {
+            var vid = Get(Id);
+            _context.Videos.Remove(vid);
             _context.SaveChanges();
             return vid;
         }
 
-        public List<Videoes> GetAll()
+        public Video Get(int Id)
         {
-            return _context.Videoeses.ToList();
+            return _context.Videos.FirstOrDefault(x => x.Id == Id);
         }
 
-        public Videoes Get(int id)
+        public List<Video> GetAll()
         {
-            return _context.Videoeses.FirstOrDefault(x => x.VideoId == id);
-        }
-
-        public Videoes Delete(int id)
-        {
-            var vid = Get(id);
-            _context.Videoeses.Remove(vid);
-          
-            return vid;
+            return _context.Videos.ToList();
         }
     }
+}
 
     
-}

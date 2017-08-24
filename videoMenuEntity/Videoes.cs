@@ -4,11 +4,9 @@ using System.Text;
 
 namespace videoMenuEntity
 {
-    public class Videoes
+    public class Video
     {
-        public string VideoName { get; set; }
-        public string VideoLenght { get; set; }
-        public int VideoId { get; set; }
-
+        public int Id { get; set; }
+        public String Name { get; set; }
     }
 }

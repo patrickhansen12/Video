@@ -7,179 +7,129 @@ namespace AVideoMenuUI
 
 
 {
-    public class Class1
-    {
-        static BLLFacade bllFacade = new BLLFacade();
-
-        
-        public static void Main(string[] args)
+        public class Program
         {
-
-
-
-            Videoes vid = new Videoes()
+            static BLLFacade bllFacade = new BLLFacade();
+            static void Main(string[] args)
             {
-                VideoName = "Fish talks: ",
-                VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
-                //VideoId = Id++
-            };
-            bllFacade.VideoService.Create(vid);
-
-            bllFacade.VideoService.Create(new Videoes()
-            {
-                VideoName = "Bob goes to the store: ",
-                VideoLenght = " Videolenght 5:0 minutes:" + " Video id: ",
-                //VideoId = id++
-            });
-
-
-            string[] menuItems =
-            {
-
-                "List all the videoes",
-                "Add new video",
-                "Delete a video",
-                "Edit a video",
-                "Exit"
-
-            };
-
-
-
-            var selection = ShowMenu(menuItems);
-            while (selection != 5)
-            {
-
-                switch (selection)
+                Video video1 = new Video()
                 {
+                    Name = "Flying cat prank gone wrong"
+                };
+                bllFacade.VideoService.Create(video1);
 
-                    case 1:
-                        Console.WriteLine("");
-                        Console.WriteLine("List of videoes");
-                        listvideo();
-                        Console.WriteLine("");
-
-
-
-                        break;
-                    case 2:
-                        Console.WriteLine("add a new video");
-                        AddVideos();
-
-                        break;
-                    case 3:
-                        Console.WriteLine("Delete Video");
-                        DeleteVideos();
-                        break;
-                    case 4:
-
-                        EditVideo();
-                        break;
-                    case 5:
-                        Console.WriteLine("Exit");
-
-                        break;
-                }
-                selection = ShowMenu(menuItems);
-
-
-            }
-
-            Console.WriteLine("bye world");
-
-
-        }
-    
-
-    private static int ShowMenu(string[] menuItems)
-        {
-
-
-            Console.WriteLine("select what you want to do");
-            Console.WriteLine("_______________________________");
-
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-
-                Console.WriteLine((i + 1) + ": " + menuItems[i]);
-
-
-
-            }
-            int selection;
-            while (!int.TryParse(Console.ReadLine(), out selection) || selection < 0 || selection > 5)
-            {
-
-                Console.WriteLine("you need to select a number between 1-5");
-
-            }
-
-            //Console.WriteLine("You have selected " + selection);
-
-            return selection;
-
-        }
-
-        private static Videoes FindVideoById()
-        {
-            Console.WriteLine("Insert Video Id: ");
-            int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
-            {
-                Console.WriteLine("Please insert a number");
-            }
-
-            return bllFacade.VideoService.Get(id);
-        }
-
-        private static void DeleteVideos()
-        {
-            var videoFound = FindVideoById();
-            if (videoFound != null)
-            {
-                bllFacade.VideoService.Delete(videoFound.VideoId);
-            }
-            var response = videoFound == null ? "Video not found" : "video was deleted";
-            Console.WriteLine(response);
-        }
-
-
-        public static void EditVideo()
-            {
-                var videoes = FindVideoById();
-                if (videoes != null)
+                bllFacade.VideoService.Create(new Video()
                 {
-                    Console.WriteLine("name");
-                    videoes.VideoName = Console.ReadLine();
-                }
-                var response = videoes == null ? "Video not found" : "video was edited";
-            Console.WriteLine(response);
+                    Name = "Fish drowns gone fishy"
+                });
 
+                String[] menuItems = {
+                    "List all Videos",
+                    "Add Video",
+                    "Delete Video",
+                    "Edit Video",
+                    "Exit\n"
+                };
+
+                var selection = ShowMenu(menuItems);
+
+                while (selection != 5)
+                {
+                    switch (selection)
+                    {
+                        case 1:
+                            ListVideos();
+                            break;
+                        case 2:
+                            AddVideos();
+                            break;
+                        case 3:
+                            DeleteVideos();
+                            break;
+                        case 4:
+                            EditVideos();
+                            break;
+                        default:
+                            break;
+                    }
+                    selection = ShowMenu(menuItems);
+                }
+                Console.WriteLine("Have a nice day");
+
+                Console.ReadLine();
             }
 
+            private static void EditVideos()
+            {
+                var videoFound = FindVideoById();
+                if (videoFound != null)
+                {
+                    Console.WriteLine("Name: ");
+                    videoFound.Name = Console.ReadLine();
+                }
+                var response = videoFound == null ? "The video dosen't exist" : "Video was edited";
+                Console.WriteLine(response);
+            }
+
+            private static Video FindVideoById()
+            {
+                Console.WriteLine("Insert Video Id: ");
+                int id;
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("Please insert a number");
+                }
+                return bllFacade.VideoService.Get(id);
+            }
+            private static void DeleteVideos()
+            {
+                var videoFound = FindVideoById();
+                if (videoFound != null)
+                {
+                    bllFacade.VideoService.Delete(videoFound.Id);
+                }
+                var response = videoFound == null ? "The video dosen't exist" : "Video was Deleted";
+                Console.WriteLine(response);
+            }
 
             private static void AddVideos()
             {
-                Console.WriteLine("Name:  ");
+                Console.WriteLine("Name: ");
                 var name = Console.ReadLine();
 
-                bllFacade.VideoService.Create(new Videoes()
+                bllFacade.VideoService.Create(new Video()
                 {
-                    VideoName = name
-                  
+                    Name = name
                 });
             }
 
-
-            public static void listvideo()
+            private static void ListVideos()
             {
-                foreach (var vidoes in bllFacade.VideoService.GetAll())
+                Console.WriteLine("\nList of Videos");
+                foreach (var video in bllFacade.VideoService.GetAll())
                 {
-                    Console.WriteLine($"Name : {vidoes.VideoName}" + $"{vidoes.VideoLenght}" + $"{vidoes.VideoId}");
+                    Console.WriteLine($"Video: {video.Id} Name: {video.Name}");
                 }
-                
+                Console.WriteLine("\n");
             }
 
+            private static int ShowMenu(string[] menuItems)
+            {
+                Console.WriteLine("What do you want to do, select a number between 1-5:\n");
+                for (int i = 0; i < menuItems.Length; i++)
+                {
+                    Console.WriteLine((i + 1) + ":" + menuItems[i]);
+                }
+
+                int selection;
+                while (!int.TryParse(Console.ReadLine(), out selection) || selection < 1 || selection > 5)
+                {
+                    Console.WriteLine("you need to select a number between 1-5");
+                }
+
+                Console.WriteLine("selection: " + selection);
+                return selection;
+            }
         }
     }
 
