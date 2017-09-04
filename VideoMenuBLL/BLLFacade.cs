@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Text;
-using videoMenuBLL.Services;
-using videoMenuDAL;
+using VideoMenuBLL.Services;
+using VideoMenuDAL;
 
-namespace videoMenuBLL
+namespace VideoMenuBLL
 {
-
     public class BLLFacade
     {
         public IVideoService VideoService
@@ -16,4 +14,3 @@ namespace videoMenuBLL
         }
     }
 }
-

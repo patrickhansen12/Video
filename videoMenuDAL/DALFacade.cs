@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VideoMenuDAL.Repository;
+using VideoMenuDAL.UOW;
 
-using videoMenuDAL.Repositories;
-
-namespace videoMenuDAL
+namespace VideoMenuDAL
 {
     public class DALFacade
     {
         public IVideoRepository VideoRepository
         {
-            get { return new VideoRepositoryEFMemory
-                    (new Context.InMemoryContext()); }
-
-
-
-            
-
+            get
+            {
+                return new VideoRepositoryEFMemory(new Context.InMemoryContext());
+            }
         }
 
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return new UnitOfWorkMemory();
+            }
+        }
     }
-
 }

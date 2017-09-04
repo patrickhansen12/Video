@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using videoMenuEntity;
+using VideoMenuDAL.Entities;
 
-namespace videoMenuDAL
+namespace VideoMenuDAL
 {
     public interface IVideoRepository
     {

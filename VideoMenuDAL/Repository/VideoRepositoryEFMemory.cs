@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using videoMenuDAL.Context;
-using videoMenuEntity;
+using VideoMenuDAL.Context;
+using VideoMenuDAL.Entities;
 
-namespace videoMenuDAL.Repositories
+namespace VideoMenuDAL.Repository
 {
     class VideoRepositoryEFMemory : IVideoRepository
     {
@@ -19,7 +19,6 @@ namespace videoMenuDAL.Repositories
         public Video Create(Video video)
         {
             _context.Videos.Add(video);
-           
             return video;
         }
 
@@ -27,7 +26,6 @@ namespace videoMenuDAL.Repositories
         {
             var vid = Get(Id);
             _context.Videos.Remove(vid);
-            
             return vid;
         }
 
@@ -42,5 +40,3 @@ namespace videoMenuDAL.Repositories
         }
     }
 }
-
-    

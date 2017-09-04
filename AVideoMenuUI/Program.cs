@@ -67,6 +67,8 @@ namespace AVideoMenuUI
                     Console.WriteLine("Name: ");
                     videoFound.Name = Console.ReadLine();
                 }
+                    bllFacade.VideoService.Update(videoFound);
+            }
                 var response = videoFound == null ? "The video dosen't exist" : "Video was edited";
                 Console.WriteLine(response);
             }
